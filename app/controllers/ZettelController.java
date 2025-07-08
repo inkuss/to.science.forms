@@ -143,16 +143,13 @@ public class ZettelController extends Controller {
 		setHeaders();
 		Result result = null;
 
-		// play.Logger.debug("Content of request-------------\n"
-		// + ZettelHelper.objectToString(request().body().asText()));
-		// play.Logger.debug("Content of model-------------\n"
-		// + ZettelHelper.objectToString(zettel.getModel()));
-		// play.Logger.debug(String.format("Content of request\n%s\n%s", request(),
-		// ZettelHelper.objectToString(request().body().asFormUrlEncoded())));
+		play.Logger.debug("Content of request-------------\n" + ZettelHelper.objectToString(request().body().asText()));
+		play.Logger.debug(String.format("Content of request\n%s\n%s", request(), ZettelHelper.objectToString(request().body().asFormUrlEncoded())));
 
 		ZettelRegister zettelRegister = new ZettelRegister();
 		CompletableFuture<Result> future = new CompletableFuture<>();
 		ZettelRegisterEntry zettel = zettelRegister.get(id);
+		play.Logger.debug("Content of model-------------\n" + ZettelHelper.objectToString(zettel.getModel()));
 		play.Logger.debug("Post data to " + zettel.getId());
 		Form<?> form = bindToForm(zettel, documentId, topicId);
 		result = renderForm(format, documentId, topicId, zettel, form);
